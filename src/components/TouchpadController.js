@@ -29,8 +29,8 @@ export default function TouchpadController() {
     return <div className={classes.root}>
         <div>
             <Fab 
-                onMouseDown={() => onControllerChange('touchY', 1)}
-                onMouseUp={() => onControllerChange('touchY', 0)} 
+                onMouseDown={() => onControllerChange({ touchY: 1 })}
+                onMouseUp={() => onControllerChange({ touchY: 0 })} 
             >
                 <KeyboardArrowUp />
             </Fab>
@@ -38,23 +38,23 @@ export default function TouchpadController() {
         <div>
             <Fab 
                 className={classes.leftButton}
-                onMouseDown={() => onControllerChange('touchX', -1)}
-                onMouseUp={() => onControllerChange('touchX', 0)} 
+                onMouseDown={() => onControllerChange({ touchX: -1 })}
+                onMouseUp={() => onControllerChange({ touchX: 0 })} 
             >
                 <KeyboardArrowLeft />
             </Fab>
             <Fab 
                 className={classes.rightButton}
-                onMouseDown={() => onControllerChange('touchX', 1)}
-                onMouseUp={() => onControllerChange('touchX', 0)} 
+                onMouseDown={() => onControllerChange({ touchX: 1 })}
+                onMouseUp={() => onControllerChange({ touchX: 0 })} 
             >
                 <KeyboardArrowRight />
             </Fab>
         </div>
         <div>
             <Fab
-                onMouseDown={() => onControllerChange('touchY', -1)}
-                onMouseUp={() => onControllerChange('touchY', 0)} 
+                onMouseDown={() => onControllerChange({ touchY: -1 })}
+                onMouseUp={() => onControllerChange({ touchY: 0 })} 
             >
                 <KeyboardArrowDown />
             </Fab>
