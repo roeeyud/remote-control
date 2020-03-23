@@ -7,18 +7,22 @@ import { Context as ControllerContext } from '../context/Controller';
 
 export default function GamepadComponent() {
     const [connected, setConnected] = useState(false)
+
     useEffect(() => {
-        window.addEventListener('gamepadconnected', function(e) {
+        function handleGamepadConnected() {
             console.log('gamepadconnected');
             setConnected(true); 
-        });
-        window.addEventListener('gamepaddisconnected', function(e) {
+        }
+        function handleGamepadDisconnected() {
             console.log('gamepadconnected');
             setConnected(false);
-        });
+        }
+        window.addEventListener('gamepadconnected', handleGamepadConnected);
+        window.addEventListener('gamepaddisconnected', handleGamepadDisconnected);
 
         return function cleanup() {
-            
+            window.removeEventListener('gamepadconnected', handleGamepadConnected);
+            window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
         };
     }, []);
     const { onControllerChange } = useContext(ControllerContext);
