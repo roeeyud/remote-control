@@ -1,0 +1,42 @@
+{
+  "name": "create-react-app",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Lior Rabinovich",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiorRabinovich/remote-control.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LiorRabinovich/remote-control/issues"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "clsx": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "latest"
+  },
+  "devDependencies": {
+    "standard-version": "^7.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
