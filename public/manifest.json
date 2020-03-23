@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Remote Control",
+  "orientation": "landscape",
+  "name": "Remote Control",
   "icons": [
     {
       "src": "favicon.ico",

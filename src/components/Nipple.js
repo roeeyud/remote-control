@@ -67,7 +67,6 @@ export default function Nipple() {
                 options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
                 onMove={onMove}
             />
-            <div className={classes.debug}><DebugView data={data} /></div>
         </div>
     );
 }
