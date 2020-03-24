@@ -2,7 +2,13 @@ import React, { createContext, useEffect, useState } from 'react';
 
 export const Context = createContext();
 
-let values = {};
+let values = {
+    x: 0,
+    y: 0,
+    yew: 0,
+    light: 0,
+    siran: 0,
+};
 
 export function Provider({ children }) {
     const [websocketUrl, setWebsocketUrl] = useState(`ws://localhost:5000`);
