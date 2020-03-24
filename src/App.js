@@ -5,11 +5,6 @@ import Page from './containers/Page'
 
 export default function App() {
   return (
-    <Router>
-      <div className="container">
-        <Route path="/" exact component={Page} />
-        <Route path="/page" component={Home} />
-      </div>
-  </Router>
+    <Page />
   );
 }
