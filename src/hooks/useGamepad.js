@@ -29,7 +29,7 @@ export default function useGamepad() {
             if(!gamepad) {
                 return;
             }
-            onControllerChange({ gamepadX: gamepad.axes[0], gamepadY: gamepad.axes[1] });
+            onControllerChange({ x: gamepad.axes[0], y: gamepad.axes[1] });
         }
 
         window.addEventListener('gamepadconnected', handleGamepadConnected);
