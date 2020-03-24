@@ -114,13 +114,13 @@ Notification.requestPermission().then(function (result) {
   }
   if (result === 'default') {
     console.log('The permission request was dismissed.');
-    return;
   }
   // Do something with the granted permission.
   notifyMe();
 });
 
 function notifyMe() {
+  alert(Notification);
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {
     console.log("This browser does not support desktop notification");
