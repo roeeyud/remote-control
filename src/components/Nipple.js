@@ -24,12 +24,39 @@ const useStyles = makeStyles({
     }
 });
 
+function getPosition(radian) {
+    if (
+        radian > 0 && radian < 0.5 ||
+        radian > 5.5 && radian < 6.5
+    ) {
+        // return 'Right';
+        return { touchX: 1 }
+    }
+
+    if (radian > 0.5 && radian < 2.5) {
+        // return 'Up';
+        return { touchY: 1 }
+    }
+
+    if (radian > 2.5 && radian < 3.7) {
+        // return 'Left';
+        return { touchX: -1 }
+    }
+
+    if (radian > 3.7 && radian < 5.5) {
+        // return 'Down';
+        return { touchY: -1 }
+    }
+}
+
 export default function Nipple() {
     const classes = useStyles();
     const [data, setData] = useState(undefined);
 
-    const onMove = (evt, data) =>{
-        console.log(evt, data)
+    const onMove = (evt, data) => {
+        const position = getPosition(data.angle.radian);
+
+        console.log(evt, position)
         setData(data);
     }
 
@@ -40,8 +67,6 @@ export default function Nipple() {
                 options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
                 onMove={onMove}
             />
-            <div className={classes.debug}><DebugView data={data} /></div>
-
         </div>
     );
 }
