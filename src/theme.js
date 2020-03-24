@@ -5,9 +5,6 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#556cd6',
-    },
-    secondary: {
       main: '#19857b',
     },
     error: {
@@ -17,6 +14,13 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  overrides: {
+    MuiFab: {
+      root: {
+        opacity: .5
+      }
+    }
+  }
 });
 
 export default theme;

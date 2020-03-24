@@ -1,20 +1,24 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import WifiIcon from '@material-ui/icons/Wifi';
-import GamesIcon from '@material-ui/icons/Games';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import HighlightIcon from '@material-ui/icons/Highlight';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { Provider as ControllerProvider } from '../context/Controller';
 import Nipple from '../components/Nipple';
+import WebSocketConnection from '../components/WebSocketConnection';
+import GamepadController from '../components/GamepadController';
+import ToggleButton from '../components/ToggleButton';
 
 const useStyles = makeStyles({
+  stream: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
   root: {
+    textAlign: 'center',
     position: 'relative',
     width: '100%',
     height: '100%',
-    maxWidth: '1024px',
-    maxHeight: '768px',
     background: '#222',
     margin: '0 auto',
     top: '50%',
@@ -43,15 +47,10 @@ const useStyles = makeStyles({
     height: '30%',
     minHeight: '200px',
     display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingRight: 50,
   },
-  nipple: {
-    // position: 'absolute',
-    // top: '50%',
-    // right: 0,
-    // transform: 'translateY(-50%)'
-  }
 });
 
 export default function Home() {
@@ -59,28 +58,26 @@ export default function Home() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.buttonsContainer}>
-        <div className={classes.buttons}>
-          <IconButton color="secondary">
-            <WifiIcon />
-          </IconButton>
-          <IconButton color="secondary">
-            <GamesIcon />
-          </IconButton>
+      <img className={classes.stream} src="/stream.jpg" alt="stream" />
+      <ControllerProvider>
+        <div className={classes.buttonsContainer}>
+          <div className={classes.buttons}>
+            <WebSocketConnection />
+            <GamepadController />
+          </div>
+          <div className={classes.buttons}>
+            <ToggleButton name="siran" >
+              <NotificationsIcon />
+            </ToggleButton>
+            <ToggleButton name="light" >
+              <HighlightIcon />
+            </ToggleButton>
+          </div>
         </div>
-        <div className={classes.buttons}>
-          <IconButton color="secondary">
-            <NotificationsIcon />
-          </IconButton>
-          <IconButton color="secondary">
-            <HighlightIcon />
-          </IconButton>
+        <div className={classes.controllers}>
+          <Nipple />
         </div>
-      </div>
-      <div className={classes.controllers}>
-        <div className={classes.nipple}><Nipple /></div>
-        <div className={classes.nipple}><Nipple /></div>
-      </div>
+      </ControllerProvider>
     </div>
   );
 }

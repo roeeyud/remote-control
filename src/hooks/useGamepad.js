@@ -42,6 +42,6 @@ export default function useGamepad() {
             window.removeEventListener('gamepadconnected', handleGamepadConnected);
             window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
         };
-    }, []);
+    }, [onControllerChange]);
     return connected;
 }

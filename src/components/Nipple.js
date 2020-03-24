@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import ReactNipple from 'react-nipple';
-import DebugView from "react-nipple/lib/DebugView";
 import { makeStyles } from '@material-ui/core/styles';
+import { Context as ControllerContext } from '../context/Controller';
 
 const useStyles = makeStyles({
     nipple: {
@@ -13,23 +13,50 @@ const useStyles = makeStyles({
 
 export default function Nipple() {
     const classes = useStyles();
-    const [data, setData] = useState(undefined);
+    const { onControllerChange } = useContext(ControllerContext);
 
+    function setValue(values) {
+        console.log(values);
+        onControllerChange(values);
+    }
     const onMove = (evt, data) => {
+        const force = Math.min(data.force, 1);
+        const degree = data.angle.degree;
+        if(degree <= 45) {
+            setValue({ x: force, y: force * (degree/45) });
+        } else if (degree <= 90) {
+            const ratio = 1 - ((degree - 45) / 45);
+            setValue({ x: force * ratio, y: force });
+        } else if (degree <= 135) {
+            const ratio = (degree - 90) / 45 * force * -1;
+            setValue({ x: force * ratio, y: force });
+        } else if (degree <= 180) {
+            const ratio = 1 - ((degree - 135) / 45 * force);
+            setValue({ x: force * -1, y: force * ratio });
+        } else if (degree <= 225) {
+            const ratio = ((degree - 180) / 45 * force) * -1;
+            setValue({ x: force * -1, y: force * ratio });
+        } else if (degree <= 270) {
+            const ratio = (1 - ((degree - 225) / 45 * force)) * -1;
+            setValue({ x: force * ratio, y: force * -1 });
+        } else if (degree <= 315) {
+            const ratio = (1 - ((degree - 225) / 45 * force)) * -1;
+            setValue({ x: force * ratio, y: force * -1 });
+        }
+        
+    }
 
-        const double = data.angle.degree > 180 ? -1 : 1;
-        const y = ((data.angle.degree-(Math.floor(data.angle.degree/90)*90)) * 100 / 90)/100 * double;
-
-        console.log(data.angle.degree, y)
-        setData(data);
+    function onEnd() {
+        setValue({ x: 0, y: 0 })
     }
 
     return (
         <div>
             <ReactNipple
                 className={classes.nipple}
-                options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
+                options={{ mode: 'static', position: { top: '50%', left: '50%' }, size: 150 }}
                 onMove={onMove}
+                onEnd={onEnd}
             />
         </div>
     );

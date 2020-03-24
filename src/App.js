@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from './containers/Home'
 import Home2 from './containers/Home2'
 import Page from './containers/Page'

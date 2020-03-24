@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 
 import Fab from '@material-ui/core/Fab';
 import Gamepad from '@material-ui/icons/Gamepad';

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, Fragment } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 
 import Fab from '@material-ui/core/Fab';
 import Wifi from '@material-ui/icons/Wifi';
