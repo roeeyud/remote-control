@@ -58,7 +58,7 @@ export default function Home() {
 
   return (
     <div className={classes.root}>
-      <img className={classes.stream} src="/stream.jpg" alt="stream" />
+      <img className={classes.stream} src={`http://${window.location.hostname}:1181/stream`} alt="stream" />
       <ControllerProvider>
         <div className={classes.buttonsContainer}>
           <div className={classes.buttons}>
