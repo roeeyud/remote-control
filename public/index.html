@@ -23,17 +23,6 @@
   <title>My page</title>
   <!-- Fonts to support Material Design -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-  <script>
-    window.addEventListener("error", handleError, true);
-
-    function handleError(evt) {
-      if (evt.message) { // Chrome sometimes provides this
-        alert("error: " + evt.message + " at linenumber: " + evt.lineno + " of file: " + evt.filename);
-      } else {
-        alert("error: " + evt.type + " from element: " + (evt.srcElement || evt.target));
-      }
-    }
-  </script>
 </head>
 
 <body>
