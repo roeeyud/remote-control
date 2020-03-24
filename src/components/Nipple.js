@@ -11,47 +11,32 @@ const useStyles = makeStyles({
     }
 });
 
-function getPosition(radian) {
-    if (
-        radian > 0 && radian < 0.5 ||
-        radian > 5.5 && radian < 6.5
-    ) {
-        // return 'Right';
-        return { touchX: 1 }
-    }
-
-    if (radian > 0.5 && radian < 2.5) {
-        // return 'Up';
-        return { touchY: 1 }
-    }
-
-    if (radian > 2.5 && radian < 3.7) {
-        // return 'Left';
-        return { touchX: -1 }
-    }
-
-    if (radian > 3.7 && radian < 5.5) {
-        // return 'Down';
-        return { touchY: -1 }
-    }
-}
-
 export default function Nipple() {
     const classes = useStyles();
     const [data, setData] = useState(undefined);
 
     const onMove = (evt, data) => {
-        const position = getPosition(data.angle.radian);
-
-        console.log(evt, position)
+        let y;
+        if (data.angle.degree < 90){
+            y = (data.angle.degree * 100 / 90)/100;
+        } else if (data.angle.degree < 180){
+            y = ((data.angle.degree-90) * 100 / 90)/100;
+        } else if (data.angle.degree < 270){
+            y = ((data.angle.degree-180) * 100 / 90)/100 * -1;
+        } else if (data.angle.degree < 360){
+            y = ((data.angle.degree-270) * 100 / 90)/100 * -1;
+        }
+        console.log(data.angle.degree, y)
         setData(data);
     }
 
     return (
-        <ReactNipple
-            className={classes.nipple}
-            options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
-            onMove={onMove}
-        />
+        <div>
+            <ReactNipple
+                className={classes.nipple}
+                options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
+                onMove={onMove}
+            />
+        </div>
     );
 }
