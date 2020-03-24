@@ -120,10 +120,9 @@ Notification.requestPermission().then(function (result) {
 });
 
 function notifyMe() {
-  alert(Notification);
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {
-    console.log("This browser does not support desktop notification");
+    alert("This browser does not support desktop notification");
   }
 
   // Let's check whether notification permissions have alredy been granted
@@ -139,6 +138,9 @@ function notifyMe() {
       if (permission === "granted") {
         new Notification("Hi there!");
       }
+      navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification('Notification with ServiceWorker');
+      });
     });
   }
 
