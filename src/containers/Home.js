@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     position: 'relative',
     width: '100%',
     height: '100%',
-    maxWidth: '640px',
-    maxHeight: '360px',
+    maxWidth: '1024px',
+    maxHeight: '768px',
     background: '#222',
     margin: '0 auto',
     top: '50%',
@@ -24,8 +24,8 @@ const useStyles = makeStyles({
     position: 'absolute',
     top: 0,
     width: '100%',
-    height: '30%',
-    padding: '0 5%',
+    height: '70px',
+    padding: '0 20px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -33,15 +33,17 @@ const useStyles = makeStyles({
   buttons: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '20%'
+    width: '30%',
+    maxWidth: '120px'
   },
   controllers: {
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '50%',
+    height: '30%',
+    minHeight: '200px',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignItems: 'center'
   },
   nipple: {

@@ -18,7 +18,7 @@ export default function Nipple() {
     const onMove = (evt, data) => {
 
         const double = data.angle.degree > 180 ? -1 : 1;
-        const y = (((data.angle.degree - (Math.floor(data.angle.degree / 90) * 90)) * 100 / 90) / 100) * double;
+        const y = ((data.angle.degree-(Math.floor(data.angle.degree/90)*90)) * 100 / 90)/100 * double;
 
         console.log(data.angle.degree, y)
         setData(data);
