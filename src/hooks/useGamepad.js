@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 
 import { Context as ControllerContext } from '../context/Controller';
 
@@ -22,6 +22,7 @@ export default function useGamepad() {
                 console.warn(`Gamepad event from invalid index "${e.gamepad.index}"`)
             }  
             setGamepadConnected(false);
+            onControllerChange({ x: 0, y: 0, yaw: 0 });
         }
         function pollGamepads() {
             const gamepad = getGamepad();
@@ -40,7 +41,8 @@ export default function useGamepad() {
             clearInterval(interval);
             window.removeEventListener('gamepadconnected', handleGamepadConnected);
             window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
+            onControllerChange({ x: 0, y: 0, yaw: 0 });
         };
-    }, [onControllerChange]);
+    }, [onControllerChange, setGamepadConnected]);
     return gamepadConnected;
 }

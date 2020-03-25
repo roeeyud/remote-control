@@ -1,38 +1,61 @@
-import React, { useContext } from 'react';
-import ReactNipple from 'react-nipple';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, { useContext, useState } from 'react';
+
+import { withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 
 import { Context as ControllerContext } from '../context/Controller';
 
-
-const useStyles = makeStyles({
+const size = 50;
+const CustomSlider = withStyles({
     root: {
-        width: 300,
-    }
-});
-
-const CustomSlider = withStyles({}, Slider)
+        color: '#FFF',
+        opacity: 0.2,
+        width: '25vw',
+        height: 50,
+    },
+    thumb: {
+        top: 0,
+        height: size,
+        width: size/ 2,
+        borderRadius: 5,
+        margin: 0,
+        marginLeft: -1 * size / 4,
+    },
+    track: {
+        display: 'none',
+    },
+    rail: {
+        top: 0,
+        height: size,
+        borderRadius: 4,
+    },
+})(Slider);
 export default function LinearController() {
-    const classes = useStyles();
+    const [value, setValue] = useState(0);
     const { onControllerChange, gamepadConnected } = useContext(ControllerContext);
 
     if (gamepadConnected) {
         return null;
     }
     
-    function setValue(values) {
-    
+    function onChangeValue(newValue) {
+        console.log(newValue);
+        setValue(newValue);
+        onControllerChange({ yaw: newValue });
     }
-    const onMove = (evt, data) => {
-    
+    function onChange(evt, data) {
+        onChangeValue(data);
+    }
+    function onChangeCommitted() {
+        onChangeValue(0);
     }
 
-    function onEnd() {
-        setValue({ x: 0, y: 0 })
-    }
-
-    return (
-        <Slider className={classes.root} />
-    );
+    return (<CustomSlider 
+        min={-1} 
+        max={1} 
+        value={value} 
+        onChange={onChange} 
+        step={0.00000001} 
+        onChangeCommitted={onChangeCommitted}
+    />);
 }

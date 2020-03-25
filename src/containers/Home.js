@@ -44,10 +44,11 @@ const useStyles = makeStyles({
     position: 'absolute',
     bottom: 50,
     right: 50,
+    opacity: 0.5,
   },
   linearContainer: {
     position: 'absolute',
-    bottom: 50,
+    bottom: 20,
     left: 50,
   },
 });
@@ -77,7 +78,7 @@ export default function Home() {
           <Nipple />
         </div>
         <div className={classes.linearContainer}>
-          {/* <LinearController /> */}
+          <LinearController />
         </div>
       </ControllerProvider>
     </div>
