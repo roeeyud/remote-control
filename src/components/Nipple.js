@@ -44,8 +44,11 @@ export default function Nipple() {
             const ratio = (1 - ((degree - 225) / 45 * force)) * -1;
             setValue({ x: force * ratio, y: force * -1 });
         } else if (degree <= 315) {
-            const ratio = (1 - ((degree - 225) / 45 * force)) * -1;
+            const ratio = ((degree - 270) / 45 * force);
             setValue({ x: force * ratio, y: force * -1 });
+        }  else {
+            const ratio = (1 - ((degree - 315) / 45 * force)) * -1;
+            setValue({ x: force, y: force * ratio });
         }
         
     }

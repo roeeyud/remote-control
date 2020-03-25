@@ -7,12 +7,12 @@ import { Provider as ControllerProvider } from '../context/Controller';
 import Nipple from '../components/Nipple';
 import WebSocketConnection from '../components/WebSocketConnection';
 import GamepadController from '../components/GamepadController';
+import LinearController from '../components/LinearController';
 import ToggleButton from '../components/ToggleButton';
 
 const useStyles = makeStyles({
   stream: {
-    maxWidth: '100%',
-    maxHeight: '100%',
+    width: '100%',
   },
   root: {
     textAlign: 'center',
@@ -40,16 +40,15 @@ const useStyles = makeStyles({
     width: '30%',
     maxWidth: '120px'
   },
-  controllers: {
+  nippleContainer: {
     position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    height: '30%',
-    minHeight: '200px',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingRight: 50,
+    bottom: 50,
+    right: 50,
+  },
+  linearContainer: {
+    position: 'absolute',
+    bottom: 50,
+    left: 50,
   },
 });
 
@@ -66,7 +65,7 @@ export default function Home() {
             <GamepadController />
           </div>
           <div className={classes.buttons}>
-            <ToggleButton name="siran" >
+            <ToggleButton name="siren" >
               <NotificationsIcon />
             </ToggleButton>
             <ToggleButton name="light" >
@@ -74,8 +73,11 @@ export default function Home() {
             </ToggleButton>
           </div>
         </div>
-        <div className={classes.controllers}>
+        <div className={classes.nippleContainer}>
           <Nipple />
+        </div>
+        <div className={classes.linearContainer}>
+          {/* <LinearController /> */}
         </div>
       </ControllerProvider>
     </div>
