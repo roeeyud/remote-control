@@ -17,7 +17,10 @@ const theme = createMuiTheme({
   overrides: {
     MuiFab: {
       root: {
-        opacity: .5
+        width: 40,
+        height: 40,
+        margin: 4,
+        opacity: .3
       }
     }
   }

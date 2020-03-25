@@ -8,6 +8,7 @@ import Nipple from '../components/Nipple';
 import WebSocketConnection from '../components/WebSocketConnection';
 import GamepadController from '../components/GamepadController';
 import LinearController from '../components/LinearController';
+import Fullscreen from '../components/Fullscreen';
 import ToggleButton from '../components/ToggleButton';
 
 const useStyles = makeStyles({
@@ -37,8 +38,6 @@ const useStyles = makeStyles({
   buttons: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '30%',
-    maxWidth: '120px'
   },
   nippleContainer: {
     position: 'absolute',
@@ -55,13 +54,13 @@ const useStyles = makeStyles({
 
 export default function Home() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <img className={classes.stream} src={`http://${window.location.hostname}:1181/stream`} alt="stream" />
       <ControllerProvider>
         <div className={classes.buttonsContainer}>
           <div className={classes.buttons}>
+            <Fullscreen />
             <WebSocketConnection />
             <GamepadController />
           </div>
