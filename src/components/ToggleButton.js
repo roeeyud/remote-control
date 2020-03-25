@@ -9,7 +9,7 @@ export default function ToggleButton({ children, name }) {
     
     function handleClick() {
         const newState = !state;
-        onControllerChange({ [name]: newState ? 1 : 0 });
+        onControllerChange({ [name]: newState });
         setState(newState);
     }
 

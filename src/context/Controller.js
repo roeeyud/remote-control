@@ -6,8 +6,8 @@ let values = {
     x: 0,
     y: 0,
     yaw: 0,
-    light: 0,
-    siren: 0,
+    light: false,
+    siren: false,
 };
 
 export function Provider({ children }) {
