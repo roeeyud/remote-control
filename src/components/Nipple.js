@@ -13,8 +13,12 @@ const useStyles = makeStyles({
 
 export default function Nipple() {
     const classes = useStyles();
-    const { onControllerChange } = useContext(ControllerContext);
+    const { onControllerChange, gamepadConnected } = useContext(ControllerContext);
 
+    if (gamepadConnected) {
+        return null;
+    }
+    
     function setValue(values) {
         console.log(values);
         onControllerChange(values);
