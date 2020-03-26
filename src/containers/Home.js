@@ -13,7 +13,11 @@ import ToggleButton from '../components/ToggleButton';
 
 const useStyles = makeStyles({
   stream: {
-    width: '100%',
+    padding: 0,
+    display: 'block',
+    margin: '0 auto',
+    maxHeight: '100%',
+    maxWidth: '100%',
   },
   root: {
     textAlign: 'center',
@@ -22,8 +26,6 @@ const useStyles = makeStyles({
     height: '100%',
     background: '#222',
     margin: '0 auto',
-    top: '50%',
-    transform: 'translateY(-50%)'
   },
   buttonsContainer: {
     position: 'absolute',
