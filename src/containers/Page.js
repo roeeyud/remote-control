@@ -10,20 +10,25 @@ const useStyles = makeStyles({
 
 export default function Page() {
   const classes = useStyles();
-  const $video = useRef(null);
 
   useEffect(() => {
+    // Grab elements, create settings, etc.
+    var video = document.getElementById('video');
+
+    // Get access to the camera!
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // Not adding `{ audio: true }` since we only want video now
       navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-        $video.srcObject = stream;
-        $video.play();
+        //video.src = window.URL.createObjectURL(stream);
+        video.srcObject = stream;
+        video.play();
       });
     }
   }, []);
 
   return (
     <div className={classes.root}>
-      <video ref={$video} width="640" height="480" autoplay></video>
+      <video id="video" width="640" height="480" autoplay></video>
       <button id="snap">Snap Photo</button>
       <canvas id="canvas" width="640" height="480"></canvas>
     </div>
