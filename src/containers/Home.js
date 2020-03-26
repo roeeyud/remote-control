@@ -13,19 +13,22 @@ import ToggleButton from '../components/ToggleButton';
 
 const useStyles = makeStyles({
   stream: {
-    padding: 0,
-    display: 'block',
-    margin: '0 auto',
-    maxHeight: '100%',
-    maxWidth: '100%',
+    // padding: 0,
+    // display: 'block',
+    // margin: '0 auto',
+    // maxHeight: '100%',
+    // maxWidth: '100%',
   },
   root: {
     textAlign: 'center',
     position: 'relative',
     width: '100%',
     height: '100%',
-    background: '#222',
+    backgroundColor: '#222',
     margin: '0 auto',
+    backgroundSize: 'contain',
+    backgroundImage: 'url(`http://${window.location.hostname}:1181/stream`)',
+    backgroundRepeat: 'no-repeat',
   },
   buttonsContainer: {
     position: 'absolute',
@@ -58,7 +61,6 @@ export default function Home() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <img className={classes.stream} src={`http://${window.location.hostname}:1181/stream`} alt="stream" />
       <ControllerProvider>
         <div className={classes.buttonsContainer}>
           <div className={classes.buttons}>
