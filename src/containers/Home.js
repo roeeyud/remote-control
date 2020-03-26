@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     backgroundColor: '#222',
     margin: '0 auto',
     backgroundSize: 'contain',
-    backgroundImage: 'url(`http://${window.location.hostname}:1181/stream`)',
+    backgroundImage: `url(http://${window.location.hostname}:1181/stream)`,
     backgroundRepeat: 'no-repeat',
   },
   buttonsContainer: {
