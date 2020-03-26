@@ -15,6 +15,7 @@ export function Provider({ children }) {
     const [websocket, setWebsocket] = useState(null);
     const [websocketConnected, setWebsocketConnected] = useState(false);
     const [gamepadConnected, setGamepadConnected] = useState(false);
+    
     useEffect(() => {
         let interval;
         setWebsocket(new WebSocket(websocketUrl));
