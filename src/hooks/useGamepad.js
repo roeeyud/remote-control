@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 
 import { Context as ControllerContext } from '../context/Controller';
 
@@ -8,28 +8,28 @@ function getGamepad() {
 }
 
 export default function useGamepad() {
-    const { onControllerChange } = useContext(ControllerContext);
-    const [connected, setConnected] = useState(false)
+    const { onControllerChange, gamepadConnected, setGamepadConnected } = useContext(ControllerContext);
     
     useEffect(() => {
         function handleGamepadConnected(e) {
             if(e.gamepad.index !== 0) {
                 console.warn(`Gamepad event from invalid index "${e.gamepad.index}"`)
             }  
-            setConnected(true); 
+            setGamepadConnected(true); 
         }
         function handleGamepadDisconnected(e) {
             if(e.gamepad.index !== 0) {
                 console.warn(`Gamepad event from invalid index "${e.gamepad.index}"`)
             }  
-            setConnected(false);
+            setGamepadConnected(false);
+            onControllerChange({ x: 0, y: 0, yaw: 0 });
         }
         function pollGamepads() {
             const gamepad = getGamepad();
             if(!gamepad) {
                 return;
             }
-            onControllerChange({ x: gamepad.axes[0], y: gamepad.axes[1] });
+            onControllerChange({ x: gamepad.axes[0], y: gamepad.axes[1], yaw: gamepad.axes[5] });
         }
 
         window.addEventListener('gamepadconnected', handleGamepadConnected);
@@ -41,7 +41,8 @@ export default function useGamepad() {
             clearInterval(interval);
             window.removeEventListener('gamepadconnected', handleGamepadConnected);
             window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
+            onControllerChange({ x: 0, y: 0, yaw: 0 });
         };
-    }, []);
-    return connected;
+    }, [onControllerChange, setGamepadConnected]);
+    return gamepadConnected;
 }

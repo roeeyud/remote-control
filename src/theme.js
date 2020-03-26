@@ -5,10 +5,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#556cd6',
-    },
-    secondary: {
-      main: '#19857b',
+      main: '#19bf89',
     },
     error: {
       main: red.A400,
@@ -17,6 +14,16 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  overrides: {
+    MuiFab: {
+      root: {
+        width: 40,
+        height: 40,
+        margin: 4,
+        opacity: .3
+      }
+    }
+  }
 });
 
 export default theme;

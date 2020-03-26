@@ -5,15 +5,16 @@ export const Context = createContext();
 let values = {
     x: 0,
     y: 0,
-    yew: 0,
-    light: 0,
-    siran: 0,
+    yaw: 0,
+    light: false,
+    siren: false,
 };
 
 export function Provider({ children }) {
-    const [websocketUrl, setWebsocketUrl] = useState(`ws://localhost:5000`);
+    const [websocketUrl, setWebsocketUrl] = useState(`ws://${window.location.hostname}:5000`);
     const [websocket, setWebsocket] = useState(null);
     const [websocketConnected, setWebsocketConnected] = useState(false);
+    const [gamepadConnected, setGamepadConnected] = useState(false);
     useEffect(() => {
         let interval;
         setWebsocket(new WebSocket(websocketUrl));
@@ -44,7 +45,16 @@ export function Provider({ children }) {
         };
     }
 
-    return <Context.Provider value={{ onControllerChange, setWebsocketUrl, websocketUrl, websocketConnected }}>
+    return <Context.Provider 
+        value={{ 
+            onControllerChange, 
+            setWebsocketUrl, 
+            websocketUrl, 
+            websocketConnected,
+            gamepadConnected,
+            setGamepadConnected,
+        }}
+    >
         {children}, 
     </Context.Provider>;
 }

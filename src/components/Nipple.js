@@ -1,71 +1,69 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import ReactNipple from 'react-nipple';
-import DebugView from "react-nipple/lib/DebugView";
 import { makeStyles } from '@material-ui/core/styles';
+import { Context as ControllerContext } from '../context/Controller';
 
 const useStyles = makeStyles({
-    root: {
-        width: '100%',
-        height: '100%',
-    },
     nipple: {
-        width: '100%',
-        height: '100%',
+        width: '150px',
+        height: '150px',
         position: 'relative',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-    },
-    debug: {
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        color: '#fff'
     }
 });
 
-function getPosition(radian) {
-    if (
-        radian > 0 && radian < 0.5 ||
-        radian > 5.5 && radian < 6.5
-    ) {
-        // return 'Right';
-        return { touchX: 1 }
-    }
-
-    if (radian > 0.5 && radian < 2.5) {
-        // return 'Up';
-        return { touchY: 1 }
-    }
-
-    if (radian > 2.5 && radian < 3.7) {
-        // return 'Left';
-        return { touchX: -1 }
-    }
-
-    if (radian > 3.7 && radian < 5.5) {
-        // return 'Down';
-        return { touchY: -1 }
-    }
-}
-
 export default function Nipple() {
     const classes = useStyles();
-    const [data, setData] = useState(undefined);
+    const { onControllerChange, gamepadConnected } = useContext(ControllerContext);
 
+    if (gamepadConnected) {
+        return null;
+    }
+    
+    function setValue(values) {
+        console.log(values);
+        onControllerChange(values);
+    }
     const onMove = (evt, data) => {
-        const position = getPosition(data.angle.radian);
+        const force = Math.min(data.force, 1);
+        const degree = data.angle.degree;
+        if(degree <= 45) {
+            setValue({ x: force, y: force * (degree/45) });
+        } else if (degree <= 90) {
+            const ratio = 1 - ((degree - 45) / 45);
+            setValue({ x: force * ratio, y: force });
+        } else if (degree <= 135) {
+            const ratio = (degree - 90) / 45 * force * -1;
+            setValue({ x: force * ratio, y: force });
+        } else if (degree <= 180) {
+            const ratio = 1 - ((degree - 135) / 45 * force);
+            setValue({ x: force * -1, y: force * ratio });
+        } else if (degree <= 225) {
+            const ratio = ((degree - 180) / 45 * force) * -1;
+            setValue({ x: force * -1, y: force * ratio });
+        } else if (degree <= 270) {
+            const ratio = (1 - ((degree - 225) / 45 * force)) * -1;
+            setValue({ x: force * ratio, y: force * -1 });
+        } else if (degree <= 315) {
+            const ratio = ((degree - 270) / 45 * force);
+            setValue({ x: force * ratio, y: force * -1 });
+        }  else {
+            const ratio = (1 - ((degree - 315) / 45 * force)) * -1;
+            setValue({ x: force, y: force * ratio });
+        }
+        
+    }
 
-        console.log(evt, position)
-        setData(data);
+    function onEnd() {
+        setValue({ x: 0, y: 0 })
     }
 
     return (
-        <div className={classes.root}>
+        <div>
             <ReactNipple
                 className={classes.nipple}
-                options={{ mode: 'static', position: { top: '50%', left: '50%' } }}
+                options={{ mode: 'static', position: { top: '50%', left: '50%' }, size: 150 }}
                 onMove={onMove}
+                onEnd={onEnd}
             />
         </div>
     );
