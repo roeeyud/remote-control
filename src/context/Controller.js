@@ -11,7 +11,7 @@ let values = {
 };
 
 export function Provider({ children }) {
-    const [websocketUrl, setWebsocketUrl] = useState(`ws://${window.location.hostname}:5000`);
+    const [websocketUrl, setWebsocketUrl] = useState(`wss://${window.location.hostname}:5000`);
     const [websocket, setWebsocket] = useState(null);
     const [websocketConnected, setWebsocketConnected] = useState(false);
     const [gamepadConnected, setGamepadConnected] = useState(false);
