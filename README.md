@@ -1,4 +1,4 @@
 # Remote control
 
 ## Screenshots
-![screenshots](https://raw.githubusercontent.com/LiorRabinovich/remote-control/master/screenshots/app.gif)
+![screenshots](https://media.giphy.com/media/S5hBNSICKhjlF3D4aY/giphy.gif)
