@@ -26,6 +26,7 @@ const useStyles = makeStyles({
     position: 'relative'
   },
   form: {
+    background: '#fff',
     '& > *': {
       width: '25ch',
     }
@@ -62,7 +63,7 @@ export default function Page() {
                 userName: meetConfig.userName,
                 signature: res.result,
                 apiKey: meetConfig.apiKey,
-                userEmail: 'email@gmail.com',
+                userEmail: 'lior@gmail.com',
                 passWord: meetConfig.passWord,
                 success() {
                   console.log('join meeting success');
@@ -84,9 +85,9 @@ export default function Page() {
   return (
     <div className={classes.root}>
       <form className={classes.form} noValidate autoComplete="off">
-        <TextField label="Meeting Number" variant="outlined" value={meetingNumber} onChange={(e) => setMeetingNumber(e.target.value)} />
-        <TextField label="username" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <TextField label="password" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <TextField label="Meeting Number" color="secondary" variant="outlined" value={meetingNumber} onChange={(e) => setMeetingNumber(e.target.value)} />
+        <TextField label="username" color="secondary" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <TextField label="password" color="secondary" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Button color="primary" variant="contained" onClick={doZoom}>Zoom</Button>
       </form>
     </div>
