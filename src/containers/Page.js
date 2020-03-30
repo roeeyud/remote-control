@@ -1,6 +1,6 @@
 import React from 'react';
-import Nipple from '../components/Nipple';
 import { makeStyles } from '@material-ui/core/styles';
+import Camera from '../components/Camera'
 
 const useStyles = makeStyles({
   root: {
@@ -11,10 +11,9 @@ const useStyles = makeStyles({
 
 export default function Page() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
-      <Nipple />
+      <Camera />
     </div>
   );
 }
