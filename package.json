@@ -23,6 +23,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
+    "@zoomus/websdk": "^1.7.2",
     "clsx": "latest",
     "react": "latest",
     "react-dom": "latest",
