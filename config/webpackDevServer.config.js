@@ -90,7 +90,7 @@ module.exports = function(proxy, allowedHost) {
     watchOptions: {
       ignored: ignoredFiles(paths.appSrc),
     },
-    https: getHttpsConfig(),
+    https: true,
     host,
     overlay: false,
     historyApiFallback: {
