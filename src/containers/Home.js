@@ -10,6 +10,7 @@ import GamepadController from '../components/GamepadController';
 import LinearController from '../components/LinearController';
 import Fullscreen from '../components/Fullscreen';
 import ToggleButton from '../components/ToggleButton';
+import Chat from '../components/Chat';
 
 const useStyles = makeStyles({
   stream: {
@@ -69,6 +70,7 @@ export default function Home() {
             <Fullscreen />
             <WebSocketConnection />
             <GamepadController />
+            <Chat />
           </div>
           <div className={classes.buttons}>
             <ToggleButton name="siren" >
