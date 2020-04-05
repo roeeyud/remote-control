@@ -22,7 +22,7 @@ export default function useGamepad() {
                 console.warn(`Gamepad event from invalid index "${e.gamepad.index}"`)
             }  
             setGamepadConnected(false);
-            onControllerChange({ x: 0, y: 0, yaw: 0 });
+            onControllerChange({ x: 0, y: 0 });
         }
         function pollGamepads() {
             const gamepad = getGamepad();
@@ -30,9 +30,8 @@ export default function useGamepad() {
                 return;
             }
             const x = gamepad.axes[0];
-            const y = gamepad.axes[1] * -1;
-            const yaw = gamepad.axes[2];
-            onControllerChange({ x, y, yaw });
+            const y = gamepad.axes[3] * -1;
+            onControllerChange({ x, y });
         }
 
         window.addEventListener('gamepadconnected', handleGamepadConnected);
@@ -44,7 +43,7 @@ export default function useGamepad() {
             clearInterval(interval);
             window.removeEventListener('gamepadconnected', handleGamepadConnected);
             window.removeEventListener('gamepaddisconnected', handleGamepadDisconnected);
-            onControllerChange({ x: 0, y: 0, yaw: 0 });
+            onControllerChange({ x: 0, y: 0 });
         };
     }, [onControllerChange, setGamepadConnected]);
     return gamepadConnected;
