@@ -70,7 +70,7 @@ export default function Home() {
             <Fullscreen />
             <WebSocketConnection />
             <GamepadController />
-            <Chat />
+            <Chat targetPeerId={'robot-call-on-robot'} peerId={'robot-call-ui'} />
           </div>
           <div className={classes.buttons}>
             <ToggleButton name="siren" >

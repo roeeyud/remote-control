@@ -30,18 +30,19 @@ const useStyles = makeStyles({
     }
 });
 
-export default function Chat() {
+export default function Chat({ targetPeerId, peerId }) {
     const [chatOn, setChatOn] = useState(false);
     const [localStream, setLocalStream] = useState(null);
+    const [remoteStream, setRemoteStream] = useState(null);
     const classes = useStyles();
     useEffect(() => {
         if (!chatOn) return;
         async function setStream() {
-            const stream = await startStream();
+            const stream = await startStream(peerId, targetPeerId, setRemoteStream);
            setLocalStream(stream);
         }
         setStream();
-    }, [chatOn]);
+    }, [chatOn, peerId, targetPeerId, setRemoteStream]);
     function startChat() {
         setChatOn(true);
     }
@@ -63,7 +64,7 @@ export default function Chat() {
         >
             <DialogContent className={classes.videoContainer}>
                 <Video className={classes.local} stream={localStream} muted={true} />
-                <Video className={classes.remote} stream={null} muted={false} />
+                <Video className={classes.remote} stream={remoteStream} muted={false} />
             </DialogContent>
             <DialogActions>
                 <Button onClick={stopChat} color="secondary">

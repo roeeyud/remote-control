@@ -1,17 +1,27 @@
-export default async function startStream(description) {
+import Peer from 'peerjs';
+
+export default async function startStream(peerId, targetPeerId, setRemoteStream) {
     const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-    const peerConnection = new RTCPeerConnection({});
-    
-    peerConnection.addEventListener('icecandidate', (event) => {
-        console.log(`ICE candidate:\n${event.candidate ? event.candidate.candidate : '(null)'}`);
-    });
-    stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
-    const offerOptions = {
-        offerToReceiveAudio: 1,
-        offerToReceiveVideo: 1
-    };
-    const offer = await peerConnection.createOffer(offerOptions);
-    await peerConnection.setLocalDescription(offer);
-    console.log(`${offer} setLocalDescription complete`);
+    const peer = new Peer(peerId); 
+    if (targetPeerId) {
+        peer.on('open', function(id) {
+            const call = peer.call(targetPeerId, stream);
+            call.on('stream', (remoteStream) => {
+                setRemoteStream(remoteStream);
+            });
+            console.log('My peer ID is: ' + id);
+        });
+        
+    } else {
+        peer.on('open', function(id) {
+            peer.on('call', (call) => {
+                call.answer(stream);
+                call.on('stream', (remoteStream) => {
+                    setRemoteStream(remoteStream);
+                });    
+            });
+            console.log('My peer ID is: ' + id);
+        });
+    }
     return stream;
 }
