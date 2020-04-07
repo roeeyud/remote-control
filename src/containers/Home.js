@@ -1,24 +1,16 @@
 import React from 'react';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import HighlightIcon from '@material-ui/icons/Highlight';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { Provider as ControllerProvider } from '../context/Controller';
 import Nipple from '../components/Nipple';
 import WebSocketConnection from '../components/WebSocketConnection';
 import GamepadController from '../components/GamepadController';
-import LinearController from '../components/LinearController';
+
 import Fullscreen from '../components/Fullscreen';
-import ToggleButton from '../components/ToggleButton';
+import EnableButton from '../components/EnableButton';
 
 const useStyles = makeStyles({
-  stream: {
-    // padding: 0,
-    // display: 'block',
-    // margin: '0 auto',
-    // maxHeight: '100%',
-    // maxWidth: '100%',
-  },
+  stream: {},
   root: {
     textAlign: 'center',
     position: 'relative',
@@ -71,19 +63,11 @@ export default function Home() {
             <GamepadController />
           </div>
           <div className={classes.buttons}>
-            <ToggleButton name="siren" >
-              <NotificationsIcon />
-            </ToggleButton>
-            <ToggleButton name="light" >
-              <HighlightIcon />
-            </ToggleButton>
+            <EnableButton />
           </div>
         </div>
         <div className={classes.nippleContainer}>
           <Nipple />
-        </div>
-        <div className={classes.linearContainer}>
-          <LinearController />
         </div>
       </ControllerProvider>
     </div>
