@@ -48,7 +48,7 @@ export function Provider({ children }) {
             }
             setWebsocketConnected(true);
             const textMessage = JSON.stringify(values);
-            const encrypted = CryptoJS.RC4.encrypt(textMessage, password).toString();
+            const encrypted = CryptoJS.AES.encrypt(textMessage, password).toString();
             websocket.send(encrypted);
         }, 30);
         return () => {
