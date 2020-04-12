@@ -7,6 +7,7 @@ import WebSocketConnection from '../components/WebSocketConnection';
 import GamepadController from '../components/GamepadController';
 
 import Fullscreen from '../components/Fullscreen';
+import VideoStreams from '../components/VideoStreams';
 import EnableButton from '../components/EnableButton';
 
 const useStyles = makeStyles({
@@ -18,11 +19,6 @@ const useStyles = makeStyles({
     height: '100%',
     backgroundColor: '#222',
     margin: '0 auto',
-    backgroundSize: 'contain',
-    backgroundImage: `url(http://${window.location.hostname}:1181/stream)`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPositionX: 'center',
-    backgroundPositionY: 'center',
   },
   buttonsContainer: {
     position: 'absolute',
@@ -56,6 +52,7 @@ export default function Home() {
   return (
     <div className={classes.root}>
       <ControllerProvider>
+        <VideoStreams />
         <div className={classes.buttonsContainer}>
           <div className={classes.buttons}>
             <Fullscreen />
