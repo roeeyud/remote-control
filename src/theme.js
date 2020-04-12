@@ -26,7 +26,6 @@ const theme = createMuiTheme({
         width: 40,
         height: 40,
         margin: 4,
-        opacity: .3
       }
     }
   }

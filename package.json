@@ -25,6 +25,7 @@
     "@material-ui/icons": "^4.9.1",
     "clsx": "latest",
     "peerjs": "^1.2.0",
+    "crypto-js": "^4.0.0",
     "react": "latest",
     "react-dom": "latest",
     "react-nipple": "^1.0.2",
