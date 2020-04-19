@@ -8,7 +8,7 @@ let values = {
     y: 0,
     enabled: false,
 };
-
+let reverseDelayTimeout;
 const wsUrl = `ws://${window.location.hostname}:4000`;
 export function Provider({ children }) {
     const [enabled, setEnabled] = useState(false);    
@@ -63,10 +63,20 @@ export function Provider({ children }) {
         if (newValues.enabled !== undefined) {
             setEnabled(newValues.enabled);
         }
+
+        if (newValues.y && Math.abs(newValues.y) < 0.58) newValues.y = 0;
+        if (newValues.x && Math.abs(newValues.x) < 0.08) newValues.x = 0;
+        
         if (newValues.y < 0) {
-            setReversing(true);
-        } else if (reversing) {
-            setReversing(false);
+            if(!reverseDelayTimeout) {
+                reverseDelayTimeout = setTimeout(() => setReversing(true), 400);
+            }
+        } else {
+            if (reversing) setReversing(false);
+            if (reverseDelayTimeout) {
+                clearTimeout(reverseDelayTimeout);
+                reverseDelayTimeout = null;
+            }
         }
         values = {
             ...values,

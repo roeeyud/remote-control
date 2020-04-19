@@ -30,6 +30,7 @@ const useStyles = makeStyles({
         backgroundRepeat: 'no-repeat',
         backgroundPositionX: 'center',
         backgroundPositionY: 'center',
+        marginRight: 20
     }
 });
 
