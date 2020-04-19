@@ -16,6 +16,7 @@ export function Provider({ children }) {
     const [error, setError] = useState(null);
     const [websocketConnected, setWebsocketConnected] = useState(false);
     const [gamepadConnected, setGamepadConnected] = useState(false);
+    const [reversing, setReversing] = useState(false);
     useEffect(() => {
         setWebsocket(new WebSocket(`ws://${window.location.hostname}:5000`));
     }, []);
@@ -61,6 +62,11 @@ export function Provider({ children }) {
         if (newValues.enabled !== undefined) {
             setEnabled(newValues.enabled);
         }
+        if (newValues.y < 0) {
+            setReversing(true);
+        } else if (reversing) {
+            setReversing(false);
+        }
         values = {
             ...values,
             ...newValues,
@@ -77,6 +83,7 @@ export function Provider({ children }) {
             error, 
             password,
             websocket,
+            reversing,
             setWebsocket: () => {
                 setWebsocket(null);
                 setError('');

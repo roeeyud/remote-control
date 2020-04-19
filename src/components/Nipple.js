@@ -20,7 +20,6 @@ export default function Nipple() {
     }
     
     function setValue(values) {
-        console.log(values);
         onControllerChange(values);
     }
     const onMove = (evt, data) => {
