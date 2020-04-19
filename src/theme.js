@@ -11,10 +11,16 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#222',
+      paper: '#222',
     },
   },
   overrides: {
+    MuiDialog: {
+      root: {
+        background: '#222',
+      }
+    },
     MuiFab: {
       root: {
         width: 40,

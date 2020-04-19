@@ -34,7 +34,7 @@ export default function WebsocketConnectionDialog({ open, onClose }) {
                 value={inputPassword}
                 onChange={(event) => setInputPassword(event.target.value)}
                 fullWidth
-                password
+                type="password"
             />
         </DialogContent>
         <DialogActions>
