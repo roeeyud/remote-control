@@ -34,19 +34,24 @@ export default function Chat({ targetPeerId, peerId }) {
     const [chatOn, setChatOn] = useState(false);
     const [localStream, setLocalStream] = useState(null);
     const [remoteStream, setRemoteStream] = useState(null);
+    const [peer, setPeer] = useState(null);
     const classes = useStyles();
     useEffect(() => {
         if (!chatOn) return;
         async function setStream() {
-            const stream = await startStream(peerId, targetPeerId, setRemoteStream);
-           setLocalStream(stream);
+            const { stream, peer: newPeer } = await startStream(peerId, targetPeerId, setRemoteStream);
+            setPeer(newPeer);
+            setLocalStream(stream);
         }
         setStream();
-    }, [chatOn, peerId, targetPeerId, setRemoteStream]);
+    }, [chatOn, peerId, targetPeerId, setRemoteStream, setLocalStream]);
     function startChat() {
         setChatOn(true);
     }
     function stopChat() {
+        if (peer) {
+            peer.destroy();
+        }
         setChatOn(false);
     }
     

@@ -9,6 +9,7 @@ let values = {
     enabled: false,
 };
 
+const wsUrl = `ws://${window.location.hostname}:4000`;
 export function Provider({ children }) {
     const [enabled, setEnabled] = useState(false);    
     const [websocket, setWebsocket] = useState(null);
@@ -18,7 +19,7 @@ export function Provider({ children }) {
     const [gamepadConnected, setGamepadConnected] = useState(false);
     const [reversing, setReversing] = useState(false);
     useEffect(() => {
-        setWebsocket(new WebSocket(`ws://${window.location.hostname}:5000`));
+        setWebsocket(new WebSocket(wsUrl));
     }, []);
 
     useEffect(() => {
@@ -88,7 +89,7 @@ export function Provider({ children }) {
                 setWebsocket(null);
                 setError('');
                 setTimeout(() => {
-                    setWebsocket(new WebSocket(`ws://${window.location.hostname}:5000`));
+                    setWebsocket(new WebSocket(wsUrl));
                 }, 50);
             },
             setPassword: (newPassword) => {
