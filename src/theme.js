@@ -16,9 +16,19 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiDialog: {
+    MuiDialogTitle: {
       root: {
-        background: '#222',
+        color: '#eee',
+      }
+    },
+    MuiInputBase: {
+      root: {
+        color: '#eee',
+      }
+    },
+    MuiInputLabel: {
+      root: {
+        color: '#eee'
       }
     },
     MuiFab: {

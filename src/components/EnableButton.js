@@ -12,7 +12,7 @@ export default function EnableButton() {
     }
 
     return <Fab aria-label="peripheralController" 
-        color={enabled ? 'primary' : 'default'}
+        color={enabled ? 'primary' : 'secondary'}
         onClick={handleClick}
     >
         <PowerSettingsNewIcon />

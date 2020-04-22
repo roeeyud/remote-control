@@ -1,14 +1,14 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import VideoCall from '@material-ui/icons/VideoCall';
+import CallEnd from '@material-ui/icons/CallEnd';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
 
 import Video from './Video';
-import startStream from './startStream';
+import useStreams from '../../hooks/useStreams';
 
 const useStyles = makeStyles({
     local: {
@@ -16,43 +16,59 @@ const useStyles = makeStyles({
         position: "absolute",
         bottom: 0,
         left: 0,
-        width: '30%',
-        height: '30%',
+        width: '25%',
     },
     remote: {
         zIndex: 0,
         width: '100%',
         height: '100%',
+        backgroundImage: 'url(/chat-screen-back.jpeg)',
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
     },
     videoContainer: {
+        padding: 0,
         position: 'relative',
         overflowY: 'hidden',
-    }
+    },
+    toolbar: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+    },
+    content: {
+        padding: 0,
+    },
 });
 
+function closeStream(stream) {
+    stream.getTracks().forEach(function(track) {
+        track.stop();
+    });
+}
+
 export default function Chat({ targetPeerId, peerId }) {
-    const [chatOn, setChatOn] = useState(false);
-    const [localStream, setLocalStream] = useState(null);
-    const [remoteStream, setRemoteStream] = useState(null);
-    const [peer, setPeer] = useState(null);
     const classes = useStyles();
-    useEffect(() => {
-        if (!chatOn) return;
-        async function setStream() {
-            const { stream, peer: newPeer } = await startStream(peerId, targetPeerId, setRemoteStream);
-            setPeer(newPeer);
-            setLocalStream(stream);
-        }
-        setStream();
-    }, [chatOn, peerId, targetPeerId, setRemoteStream, setLocalStream]);
+    const [chatOn, setChatOn] = useState(false);
+    const {
+        peer,
+        localStream,
+        remoteStream,
+        setLocalStream,
+        setRemoteStream,
+    } = useStreams(targetPeerId, peerId, chatOn, setChatOn);
     function startChat() {
+        document.documentElement.requestFullscreen();
         setChatOn(true);
     }
     function stopChat() {
-        if (peer) {
-            peer.destroy();
-        }
         setChatOn(false);
+        if (localStream) closeStream(localStream);
+        if (remoteStream) closeStream(remoteStream);
+        setLocalStream(null);
+        setRemoteStream(null);
+        if (peer) peer.destroy();
     }
     
     return <Fragment>
@@ -66,15 +82,17 @@ export default function Chat({ targetPeerId, peerId }) {
             open={chatOn} 
             onClose={() => {}} 
             fullScreen
+            hideBackdrop
+            
         >
-            <DialogContent className={classes.videoContainer}>
+            <DialogContent  className={classes.videoContainer}>
                 <Video className={classes.local} stream={localStream} muted={true} />
                 <Video className={classes.remote} stream={remoteStream} muted={false} />
             </DialogContent>
-            <DialogActions>
-                <Button onClick={stopChat} color="secondary">
-                    Hangup 
-                </Button>
+            <DialogActions className={classes.toolbar}>
+                <Fab onClick={stopChat} color="secondary">
+                    <CallEnd/> 
+                </Fab>
             </DialogActions>
       </Dialog>
     </Fragment>;
