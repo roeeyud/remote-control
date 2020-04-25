@@ -22,15 +22,14 @@ const useStyles = makeStyles({
         height: '100%',
     },
     backVideo: {
-        flex: 1,
+        width: '25%',
         height: '100%',
         backgroundSize: 'contain',
         backgroundImage: `url(http://${window.location.hostname}:1182/stream)`,
         // backgroundImage: `url(https://www.superkit.co.il/wp-content/uploads/2020/03/20_20-19-600x600.jpg)`,
         backgroundRepeat: 'no-repeat',
         backgroundPositionX: 'center',
-        backgroundPositionY: 'center',
-        marginRight: 20
+        backgroundPositionY: 'bottom'
     }
 });
 
@@ -39,7 +38,7 @@ export default function VideoStreams() {
     const { reversing } = useContext(ControllerContext);
 
     return <div className={classes.root}>
-        {reversing ? <div className={classes.backVideo} /> : null}
+        <div className={classes.backVideo} />
         <div className={classes.frontVideo} />
     </div>;
 }

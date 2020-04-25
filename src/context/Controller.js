@@ -64,7 +64,7 @@ export function Provider({ children }) {
             setEnabled(newValues.enabled);
         }
 
-        if (newValues.y && Math.abs(newValues.y) < 0.58) newValues.y = 0;
+        if (newValues.y && Math.abs(newValues.y) < 0.08) newValues.y = 0;
         if (newValues.x && Math.abs(newValues.x) < 0.08) newValues.x = 0;
         
         if (newValues.y < 0) {
