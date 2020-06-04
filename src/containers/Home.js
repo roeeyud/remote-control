@@ -5,6 +5,7 @@ import { Provider as ControllerProvider } from '../context/Controller';
 import Nipple from '../components/Nipple';
 import WebSocketConnection from '../components/WebSocketConnection';
 import GamepadController from '../components/GamepadController';
+import Map from '../components/Map/Map';
 import Fullscreen from '../components/Fullscreen';
 import Chat from '../components/Chat';
 import VideoStreams from '../components/VideoStreams';
@@ -56,8 +57,9 @@ export default function Home() {
         <div className={classes.buttonsContainer}>
           <div className={classes.buttons}>
             <Fullscreen />
-            <WebSocketConnection />
+            {/* <WebSocketConnection /> */}
             <GamepadController />
+            <Map />
             <Chat targetPeerId={'robot-call-on-robot'} peerId={'robot-call-ui'} />
           </div>
           <div className={classes.buttons}>
