@@ -57,7 +57,7 @@ export default function Home() {
         <div className={classes.buttonsContainer}>
           <div className={classes.buttons}>
             <Fullscreen />
-            {/* <WebSocketConnection /> */}
+            <WebSocketConnection />
             <GamepadController />
             <MapContainer />
             <Chat targetPeerId={'robot-call-on-robot'} peerId={'robot-call-ui'} />
