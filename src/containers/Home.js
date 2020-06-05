@@ -9,6 +9,7 @@ import Fullscreen from '../components/Fullscreen';
 import Chat from '../components/Chat';
 import VideoStreams from '../components/VideoStreams';
 import EnableButton from '../components/EnableButton';
+import Map from'../components/Map';
 
 const useStyles = makeStyles({
   stream: {},
@@ -68,6 +69,7 @@ export default function Home() {
           <Nipple />
         </div>
       </ControllerProvider>
+      <Map />
     </div>
   );
 }
