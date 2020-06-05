@@ -28,7 +28,7 @@ const Map = PixiComponent("Map", {
 const Robot = PixiComponent("Robot", {
   create: (props) => new Graphics(),
   applyProps: (instance, _, props) => {
-    const { robot, points, robotProp } = props;
+    const { robot, points } = props;
     instance.clear();
     const size = 30;
     instance.lineStyle(size, 0xff0000);
