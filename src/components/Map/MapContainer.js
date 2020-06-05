@@ -5,7 +5,7 @@ import ExploreIcon from "@material-ui/icons/Explore";
 
 import MapDialog from './MapDialog'
 
-export default function Map() {
+export default function MapContainer() {
   const [open, setOpen] = useState(false);
 
   function handleClose() {
