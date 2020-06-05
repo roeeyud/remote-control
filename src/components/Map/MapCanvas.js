@@ -16,7 +16,7 @@ const Map = PixiComponent("Map", {
   applyProps: (instance, _, props) => {
     const { points } = props;
     instance.clear();
-    instance.lineStyle(50, 0x33ff00);
+    instance.lineStyle(50, 0xe0e0e0);
     instance.moveTo(points[0].x, points[0].y);
     points.forEach(({ x, y }) => {
       instance.lineTo(x, y);
@@ -31,7 +31,7 @@ const Robot = PixiComponent("Robot", {
     const { robot, points } = props;
     instance.clear();
     const size = 30;
-    instance.lineStyle(size, 0xff0000);
+    instance.lineStyle(size, 0x19bf89);
     const robotX = points[robot.point].x + size;
     const robotY = points[robot.point].y + calcAngle(robot.angle);
     instance.moveTo(points[robot.point].x, points[robot.point].y);
