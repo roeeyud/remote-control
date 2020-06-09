@@ -5,7 +5,7 @@ import { Stage, PixiComponent } from "@inlet/react-pixi";
 const mapSize = 200;
 const classSize = 30;
 const robotSize = 25;
-const robotLineSize = 5;
+const robotLineSize = 3;
 const robotLineDistance = 10;
 const middlePoint = 5;
 const middleSpace = 13;
@@ -121,22 +121,21 @@ const RobotLine = PixiComponent("RobotLine", {
     const { robot, points } = props;
     const { point, angle } = robot;
 
-    const { x: pointX, y: pointY } = getRobotLinePointPosition({
-      x: points[point].x,
-      y: points[point].y,
-      point,
-    });
-    const { x: robotLineX, y: robotLineY } = getRobotLineMovePosition({
-      x: pointX,
-      y: pointY,
-      angle,
-      point,
-    });
+    const { x: pointX, y: pointY } = getRobotPointPosition(
+      points[point].x,
+      points[point].y,
+      point
+    );
+    
+    const lineStartX = pointX + (robotSize / 2) - (robotLineSize / 2);
+    const lineStartY = pointY;
+    const targetX = lineStartX + (robotSize * Math.sin(Math.PI * 2 * angle));
+    const targetY = lineStartY + (robotSize * Math.cos(Math.PI * 2 * angle));
 
     instance.clear();
     instance.lineStyle(robotLineSize, 0xff0000);
-    instance.moveTo(pointX, pointY);
-    instance.lineTo(robotLineX, robotLineY);
+    instance.moveTo(lineStartX , lineStartY);
+    instance.lineTo(targetX, targetY);
     instance.endFill();
   },
 });
@@ -144,8 +143,8 @@ const RobotLine = PixiComponent("RobotLine", {
 export default function MapCanvas() {
   const points = getPoints();
   const [robotData, setRobotData] = useState({
-    point: 0,
-    angle: 0.5,
+    point: 3,
+    angle: 0.8,
   });
 
   return (
