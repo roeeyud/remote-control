@@ -142,11 +142,26 @@ const RobotLine = PixiComponent("RobotLine", {
 
 export default function MapCanvas() {
   const points = getPoints();
-  const [robotData, setRobotData] = useState({
-    point: 3,
-    angle: 0.8,
-  });
+  const [robotData, setRobotData] = useState(null);
+  useEffect(() => {
+    function fetchLocation() {
+      const xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          setRobotData(JSON.parse(this.response));
+        }
+      };
+      xhttp.open("GET", `http://${window.location.hostname}:5500/location`, true);
+      xhttp.send();
+    }
+    const interval = setInterval(() => fetchLocation, 3000);
+    fetchLocation();
+    return () => clearInterval(interval);
+  }, [setRobotData]);
 
+  if(!robotData) {
+    return null;
+  }
   return (
     <Stage
       width={mapSize}
