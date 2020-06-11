@@ -21,11 +21,13 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@inlet/react-pixi": "^4.1.0",
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
     "clsx": "latest",
-    "peerjs": "^1.2.0",
     "crypto-js": "^4.0.0",
+    "peerjs": "^1.2.0",
+    "pixi.js": "^5.2.4",
     "react": "latest",
     "react-dom": "latest",
     "react-nipple": "^1.0.2",
