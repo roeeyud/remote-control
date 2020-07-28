@@ -22,7 +22,7 @@ export default function MapContainer() {
         <ExploreIcon />
       </Fab>
       <MapDialog
-        open={open}
+        open={true}
         onClose={handleClose}
       />
     </Fragment>

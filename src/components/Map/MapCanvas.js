@@ -3,10 +3,10 @@ import { Graphics, useTick } from "pixi.js";
 import Typography from "@material-ui/core/Typography";
 import { Stage, PixiComponent } from "@inlet/react-pixi";
 
-const mapSize = 250;
 const classSize = 50;
 const robotSize = 40;
 const robotLineSize = 3;
+const lineLength = 20;
 const startX = classSize / 2;
 const startY = 0;
 
@@ -72,6 +72,19 @@ const Robot = PixiComponent("Robot", {
   },
 });
 
+function canvas_arrow(context, fromx, fromy, tox, toy) {
+  var headlen = 10; // length of head in pixels
+  var dx = tox - fromx;
+  var dy = toy - fromy;
+  var angle = Math.atan2(dy, dx);
+  context.lineStyle(3, 0x4287f5);
+  context.moveTo(fromx, fromy);
+  context.lineTo(tox, toy + 1);
+  context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 5), toy - headlen * Math.sin(angle - Math.PI / 5));
+  context.moveTo(tox, toy);
+  context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 5), toy - headlen * Math.sin(angle + Math.PI / 5));
+}
+
 const RobotLine = PixiComponent("RobotLine", {
   create: () => new Graphics(),
   applyProps: (instance, _, props) => {
@@ -79,21 +92,18 @@ const RobotLine = PixiComponent("RobotLine", {
     const { point, angle } = robot;
     const fixedAngle =  ((angle % 1 * 2) > 1) ? 0.5 : 0;
     const { x: lineStartX, y: lineStartY } = getRobotCenter(point, points);
-    const targetX = lineStartX + (robotSize * Math.sin(Math.PI * 2 * fixedAngle));
-    const targetY = lineStartY + (robotSize * Math.cos(Math.PI * 2 * fixedAngle));
-
+    const targetX = lineStartX + (lineLength * Math.sin(Math.PI * 2 * fixedAngle));
+    const targetY = lineStartY + (lineLength * Math.cos(Math.PI * 2 * fixedAngle));
     instance.clear();
-    instance.lineStyle(robotLineSize, 0xcc4444);
-    
-    instance.moveTo(lineStartX, lineStartY);
-    instance.lineTo(targetX, targetY);
+    instance.lineStyle(3, 0x4287f5);
+    canvas_arrow(instance, lineStartX, lineStartY, targetX, targetY);
     instance.endFill();
   },
 });
 
 export default function MapCanvas() {
   const points = getPoints();
-  const [robotData, setRobotData] = useState(null);
+  const [robotData, setRobotData] = useState({ point: 0, angle: .3});
   useEffect(() => {
     function fetchLocation() {
       const xhttp = new XMLHttpRequest();
